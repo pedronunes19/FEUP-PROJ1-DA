@@ -3,4 +3,4 @@ project(DA_PROJ_1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(project main.cpp)
+add_executable(project main.cpp include/menu.h src/menu.cpp)
