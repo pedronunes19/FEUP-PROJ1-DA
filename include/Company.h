@@ -1,6 +1,8 @@
 #ifndef DA_PROJ_1_COMPANY_H
 #define DA_PROJ_1_COMPANY_H
 
+#include <vector>
+
 class Company {
 public:
     std::vector<Truck *> get_trucks() const {return trucks;}

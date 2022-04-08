@@ -1,5 +1,5 @@
-#ifndef PROJECT_MENU_H
-#define PROJECT_MENU_H
+#ifndef DA_PROJ_1_MENU_H
+#define DA_PROJ_1_MENU_H
 
 #include <iostream>
 
@@ -58,4 +58,4 @@ public:
     static void endProgram();
 };
 
-#endif //PROJECT_MENU_H
+#endif //DA_PROJ_1_MENU_H
