@@ -13,6 +13,8 @@ public:
     unsigned get_duration() const { return _duration; };
 
 private:
+
+    bool express;
     unsigned _volume;
     unsigned _weight;
     unsigned _profit;
