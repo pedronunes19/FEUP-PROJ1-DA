@@ -2,6 +2,7 @@
 #define DA_PROJ_1_MENU_H
 
 #include <iostream>
+#include "company.h"
 
 class Menu {
 
@@ -20,7 +21,10 @@ class Menu {
     };
 
     enum ClientMenuOption {
-        CLIENT_BACK = 1
+        CLIENT_DELIVER_TRUCKS = 1,
+        CLIENT_DELIVER_PROFIT,
+        CLIENT_DELIVER_EXPRESS,
+        CLIENT_BACK
     };
 
     /**
@@ -56,6 +60,12 @@ public:
      * Close the program
      */
     static void endProgram();
+
+    static void deliveriesMinTrucks(Company & deliveryCompany);
+    static void deliveriesMaxProfit(Company & deliveryCompany);
+    static void deliveriesExpress(Company & deliveryCompany);
+
+
 };
 
 #endif //DA_PROJ_1_MENU_H

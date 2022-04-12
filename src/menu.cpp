@@ -1,11 +1,11 @@
 #include "../include/menu.h"
 
-std::string Menu::ADMIN_PASSWORD = "aaa";
+std::string Menu::ADMIN_PASSWORD = "admin";
 bool Menu::exitApplication = false;
 
 void Menu::init() {
 
-    // BusCompany stcp{"STCP"}; replace this
+    Company deliveryCompany{"DA"}; 
 
     atexit(Menu::endProgram);
 
@@ -13,8 +13,7 @@ void Menu::init() {
 
         std::cout << std::string(100, '\n');
 
-        // int option = Menu::showInitialMenu(stcp.getName());
-        int option = Menu::showInitialMenu("NOME");
+        int option = Menu::showInitialMenu(deliveryCompany.getName());
 
         switch (option) {
             case CLIENT:
@@ -25,6 +24,15 @@ void Menu::init() {
                     option = Menu::showClientMenu();
 
                     switch (option) {
+                        case CLIENT_DELIVER_TRUCKS:
+                            Menu::deliveriesMinTrucks(deliveryCompany);
+                            break;
+                        case CLIENT_DELIVER_PROFIT:
+                            Menu::deliveriesMaxProfit(deliveryCompany);
+                            break;
+                        case CLIENT_DELIVER_EXPRESS:
+                            Menu::deliveriesExpress(deliveryCompany);
+                            break;
                         case CLIENT_BACK:
                             break;
                         default:
@@ -91,7 +99,7 @@ int Menu::showClientMenu() {
     int option;
 
     std::cout << "\tHello client, what would you like to do?\n\n";
-    std::cout << "\t[1] Back\n\n";
+    std::cout << "\t[1] Deliveries (min trucks)\n\t[2] Deliveries (max profit)\n\t[3] Express Deliveries\n\t[4] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
@@ -128,4 +136,19 @@ void Menu::waitForPrompt(const std::string &prompt) {
 
 void Menu::endProgram() {
     Menu::waitForPrompt("\tProgram terminated, see you soon :) [press ENTER to quit]");
+}
+
+void Menu::deliveriesMinTrucks(Company & deliveryCompany){
+    deliveryCompany.deliveriesMinTrucks();
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::deliveriesMaxProfit(Company & deliveryCompany){
+    deliveryCompany.deliveriesMaxProfit();
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::deliveriesExpress(Company & deliveryCompany){
+    deliveryCompany.deliveriesExpress();
+    Menu::waitForPrompt("\t[press ENTER to continue]");
 }

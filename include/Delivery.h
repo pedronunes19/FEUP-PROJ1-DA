@@ -6,6 +6,7 @@ class Delivery {
 public:
     Delivery( unsigned volume, unsigned weight, unsigned profit, unsigned duration):
     _volume(volume), _weight(weight), _profit(profit), _duration(duration){};
+    
     unsigned get_volume() const { return _volume; };
     unsigned get_weight() const { return _weight; };
     unsigned get_profit() const { return _profit; };
