@@ -28,7 +28,8 @@ private:
     std::string companyName;
 
     std::vector<Delivery *> warehouse;
-    std::vector<Truck *> trucks;
+    std::vector<Truck *> availableTrucks;
+    std::vector<Truck *> unavailableTrucks;
 };
 
 #endif //DA_PROJ_1_COMPANY_H
