@@ -4,16 +4,17 @@
 
 class Truck {
 public:
-    Truck(unsigned volume, unsigned weight, std::string plate): maxVolume(volume), maxWeight(weight), plate(plate){};
+    Truck(unsigned volume, unsigned weight, unsigned cost): maxVolume(volume), maxWeight(weight), cost(cost){};
     
     unsigned get_volume() const { return maxVolume; };
     unsigned get_weight() const { return maxWeight; };
     std::string get_plate() const{ return plate; }
 
 private:
-    std::string plate;
+    std::string plate;  // not in the dataset so...
     unsigned maxVolume;
     unsigned maxWeight;
+    unsigned cost;
 };
 
 

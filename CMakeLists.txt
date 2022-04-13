@@ -3,4 +3,4 @@ project(DA_PROJ_1)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(project main.cpp include/menu.h src/menu.cpp include/company.h src/company.cpp include/delivery.h src/delivery.cpp include/truck.h)
+add_executable(project main.cpp include/utils.h src/utils.cpp include/menu.h src/menu.cpp include/company.h src/company.cpp include/delivery.h src/delivery.cpp include/truck.h)

@@ -5,20 +5,20 @@
 class Delivery {
 public:
     Delivery( unsigned volume, unsigned weight, unsigned profit, unsigned duration):
-    _volume(volume), _weight(weight), _profit(profit), _duration(duration){};
+    volume(volume), weight(weight), profit(profit), duration(duration){};
     
-    unsigned get_volume() const { return _volume; };
-    unsigned get_weight() const { return _weight; };
-    unsigned get_profit() const { return _profit; };
-    unsigned get_duration() const { return _duration; };
+    unsigned get_volume() const { return volume; };
+    unsigned get_weight() const { return weight; };
+    unsigned get_profit() const { return profit; };
+    unsigned get_duration() const { return duration; };
 
 private:
 
     bool express;
-    unsigned _volume;
-    unsigned _weight;
-    unsigned _profit;
-    unsigned _duration;
+    unsigned volume;
+    unsigned weight;
+    unsigned profit;
+    unsigned duration;
 };
 
 
