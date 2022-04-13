@@ -8,7 +8,7 @@ public:
     
     unsigned get_volume() const { return maxVolume; };
     unsigned get_weight() const { return maxWeight; };
-    std::string get_plate() const{ return plate; }
+    unsigned get_cost() const{ return cost; }
 
 private:
     std::string plate;  // not in the dataset so...

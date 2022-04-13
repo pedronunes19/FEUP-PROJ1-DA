@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include "utils.h"
-#include "delivery.h"
+#include "Delivery.h"
 #include "truck.h"
 
 class Company {

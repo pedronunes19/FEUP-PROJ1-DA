@@ -2,7 +2,7 @@
 #define DA_PROJ_1_MENU_H
 
 #include <iostream>
-#include "company.h"
+#include "Company.h"
 
 class Menu {
 
