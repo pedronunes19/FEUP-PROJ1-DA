@@ -43,7 +43,30 @@ void Company::storeDeliveries(std::vector<std::string> deliveries){
 }
 
 void Company::deliveriesMinTrucks(){
-    std::cout << "Not Implemented" << std::endl;
+    unsigned int currentVolume = 0, currentWeight = 0;
+    std::sort(warehouse.begin(), warehouse.end(),[](const Delivery* lhs, const Delivery* rhs) {
+        if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() < rhs->get_volume();
+        return lhs->get_weight() + lhs->get_volume() < rhs->get_weight() + rhs->get_volume();
+    });
+    std::sort(availableTrucks.begin(), availableTrucks.end(),[](const Truck* lhs, const Truck* rhs) {
+        return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
+    });
+    while (!warehouse.empty() && !availableTrucks.empty()){
+        if ((currentVolume + warehouse[0]->get_volume() <= availableTrucks[0]->get_volume()) &&
+        (currentWeight + warehouse[0]->get_weight() <= availableTrucks[0]->get_weight())) {
+            currentVolume += warehouse[0]->get_volume(), currentWeight += warehouse[0]->get_weight();
+            delete warehouse[0];
+            warehouse.erase(warehouse.begin());
+            std::cout << currentVolume << " " << currentWeight << std::endl;
+        }
+        else {
+            unavailableTrucks.push_back(availableTrucks[0]);
+            availableTrucks.erase(availableTrucks.begin());
+            currentWeight = 0;
+            currentVolume = 0;
+        }
+    }
+    std::cout << unavailableTrucks.size() << " " << warehouse.size() << std::endl;
 };
 void Company::deliveriesMaxProfit(){
     std::cout << "Not Implemented" << std::endl;
@@ -61,7 +84,7 @@ void Company::deliveriesExpress(){
 //        std::cout << current_time << " " << warehouse_dup[0]->get_duration() << " " << test[i]->get_duration() << std::endl;
 //        i++;
         current_time += warehouseExpress[0]->get_duration();
-        completion_time += (warehouseExpress[0]->get_duration() + completion_time);
+        completion_time = (warehouseExpress[0]->get_duration() + completion_time);
         warehouseExpress.erase(warehouseExpress.begin());
     }
     std::cout << "Delivery time: " << current_time << '\n';
