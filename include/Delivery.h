@@ -14,11 +14,11 @@ public:
 
 private:
 
-    bool express;
     unsigned volume;
     unsigned weight;
     unsigned profit;
-    unsigned duration;
+    unsigned duration;  // relevant for express delivery
+    unsigned daysBehind;
 };
 
 

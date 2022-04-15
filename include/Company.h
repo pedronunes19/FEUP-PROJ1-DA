@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include "utils.h"
 #include "Delivery.h"
 #include "truck.h"
@@ -29,7 +30,10 @@ private:
 
     std::string companyName;
 
+    // separated "warehouses" so we can more easily deal with context
     std::vector<Delivery *> warehouse;
+    std::vector<Delivery *> warehouseExpress;
+    
     std::vector<Truck *> availableTrucks;
     std::vector<Truck *> unavailableTrucks;
     // no need to store the express delivery truck as it is singular, and maxVolume and maxWeight are irrelevant
