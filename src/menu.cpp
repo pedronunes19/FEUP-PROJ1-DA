@@ -45,6 +45,9 @@ void Menu::init() {
                     option = Menu::showAdminMenu();
 
                     switch (option) {
+                        case ADMIN_RESTORE:
+                            Menu::restoreWarehouse(deliveryCompany);
+                            break;    
                         case ADMIN_BACK:
                             break;
                         default:
@@ -82,7 +85,7 @@ int Menu::showAdminMenu() {
     int option;
 
     std::cout << "\tHello administrator, what would you like to do?\n\n";
-    std::cout << "\t[1] Back\n\n";
+    std::cout << "\t[1] Restore Warehouse\n\t[2] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
@@ -150,5 +153,10 @@ void Menu::deliveriesMaxProfit(Company & deliveryCompany){
 
 void Menu::deliveriesExpress(Company & deliveryCompany){
     deliveryCompany.deliveriesExpress();
+    Menu::waitForPrompt("\t[press ENTER to continue]");
+}
+
+void Menu::restoreWarehouse(Company & deliveryCompany){
+    deliveryCompany.restoreWarehouse();
     Menu::waitForPrompt("\t[press ENTER to continue]");
 }

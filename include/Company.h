@@ -25,6 +25,7 @@ public:
     void deliveriesMinTrucks();
     void deliveriesMaxProfit();
     void deliveriesExpress();
+    void restoreWarehouse();
 
 private:
 

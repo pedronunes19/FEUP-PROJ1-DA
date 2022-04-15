@@ -17,7 +17,8 @@ class Menu {
     };
 
     enum AdminMenuOption {
-        ADMIN_BACK = 1
+        ADMIN_RESTORE = 1,
+        ADMIN_BACK
     };
 
     enum ClientMenuOption {
@@ -64,6 +65,8 @@ public:
     static void deliveriesMinTrucks(Company & deliveryCompany);
     static void deliveriesMaxProfit(Company & deliveryCompany);
     static void deliveriesExpress(Company & deliveryCompany);
+    static void restoreWarehouse(Company & deliveryCompany);
+
 
 
 };

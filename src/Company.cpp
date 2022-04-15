@@ -18,10 +18,11 @@ Company::~Company(){
     }
 
     for (int i = 0; i < warehouseExpress.size(); i++){
-        delete warehouse.at(i);
+        delete warehouseExpress.at(i);
     }
     
 }
+
 
 void Company::storeTrucks(std::vector<std::string> trucks){
     for (auto t: trucks){
@@ -43,7 +44,11 @@ void Company::storeDeliveries(std::vector<std::string> deliveries){
 }
 
 void Company::deliveriesMinTrucks(){
-    unsigned int currentVolume = 0, currentWeight = 0;
+    unsigned int currentVolume = 0, currentWeight = 0, previous_size = warehouse.size();
+    if (!previous_size){
+        std::cout << "\tEverything has been delivered!" << std::endl;
+        return;
+    }
     std::sort(warehouse.begin(), warehouse.end(),[](const Delivery* lhs, const Delivery* rhs) {
         if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() < rhs->get_volume();
         return lhs->get_weight() + lhs->get_volume() < rhs->get_weight() + rhs->get_volume();
@@ -52,9 +57,9 @@ void Company::deliveriesMinTrucks(){
         return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
     });
     while (!warehouse.empty() && !availableTrucks.empty()){
-        if ((currentVolume + warehouse[0]->get_volume() <= availableTrucks[0]->get_volume()) &&
-        (currentWeight + warehouse[0]->get_weight() <= availableTrucks[0]->get_weight())) {
-            currentVolume += warehouse[0]->get_volume(), currentWeight += warehouse[0]->get_weight();
+        if ((currentVolume + warehouse.at(0)->get_volume() <= availableTrucks.at(0)->get_volume()) &&
+        (currentWeight + warehouse.at(0)->get_weight() <= availableTrucks.at(0)->get_weight())) {
+            currentVolume += warehouse.at(0)->get_volume(), currentWeight += warehouse.at(0)->get_weight();
             delete warehouse.at(0);
             warehouse.erase(warehouse.begin());
             std::cout << currentVolume << " " << currentWeight << std::endl;
@@ -67,14 +72,26 @@ void Company::deliveriesMinTrucks(){
         }
     }
     std::cout << unavailableTrucks.size() << " " << warehouse.size() << std::endl;
-};
+
+    // trucks available for next day of deliveries
+    while (!unavailableTrucks.empty()){
+        availableTrucks.push_back(unavailableTrucks.at(unavailableTrucks.size()-1));
+        unavailableTrucks.pop_back();
+    }
+}
+
 void Company::deliveriesMaxProfit(){
     std::cout << "Not Implemented" << std::endl;
-};
+}
+
 void Company::deliveriesExpress(){
     const unsigned int time_limit = 28800; // 8 horas em segundos, das 9 às 5
     unsigned int current_time = 0, previous_size = warehouseExpress.size();
     double completion_time = 0.0;
+    if (!previous_size){
+        std::cout << "\tEverything has been delivered!" << std::endl;
+        return;
+    }
 //    int i = 0;
     std::sort(warehouseExpress.begin(), warehouseExpress.end(),[](const Delivery* lhs, const Delivery* rhs){
         return lhs->get_duration() < rhs->get_duration();
@@ -89,9 +106,26 @@ void Company::deliveriesExpress(){
         delete warehouseExpress.at(0);
         warehouseExpress.erase(warehouseExpress.begin());
     }
-    std::cout << "Delivery time: " << current_time << '\n';
-    std::cout << "Packages delivered: " << previous_size - warehouseExpress.size() << " out of " << previous_size << '\n';
-    std::cout << "Average delivery duration: " << current_time / (previous_size - warehouseExpress.size()) << '\n';
-    std::cout << "Average completion time: " << completion_time / (previous_size - warehouseExpress.size()) << std::endl;
+    std::cout << "\tDelivery time: " << current_time << '\n';
+    std::cout << "\tPackages delivered: " << previous_size - warehouseExpress.size() << " out of " << previous_size << '\n';
+    std::cout << "\tAverage delivery duration: " << current_time / (previous_size - warehouseExpress.size()) << '\n';
+    std::cout << "\tAverage completion time: " << completion_time / (previous_size - warehouseExpress.size()) << std::endl;
 };
+
+void Company::restoreWarehouse(){
+    auto deliveryLines = utils::file::readFile("../input/encomendas.txt");
+
+    for (int i = 0; i < warehouse.size(); i++){
+        delete warehouse.at(i);
+    }
+
+    for (int i = 0; i < warehouseExpress.size(); i++){
+        delete warehouseExpress.at(i);
+    }
+
+    warehouse.clear(); warehouseExpress.clear();
+    storeDeliveries(deliveryLines);
+
+}
+
 
