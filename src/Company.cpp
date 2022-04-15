@@ -55,7 +55,7 @@ void Company::deliveriesMinTrucks(){
         if ((currentVolume + warehouse[0]->get_volume() <= availableTrucks[0]->get_volume()) &&
         (currentWeight + warehouse[0]->get_weight() <= availableTrucks[0]->get_weight())) {
             currentVolume += warehouse[0]->get_volume(), currentWeight += warehouse[0]->get_weight();
-            delete warehouse[0];
+            delete warehouse.at(0);
             warehouse.erase(warehouse.begin());
             std::cout << currentVolume << " " << currentWeight << std::endl;
         }
@@ -73,7 +73,8 @@ void Company::deliveriesMaxProfit(){
 };
 void Company::deliveriesExpress(){
     const unsigned int time_limit = 28800; // 8 horas em segundos, das 9 às 5
-    unsigned int current_time = 0, completion_time = 0, previous_size = warehouseExpress.size();
+    unsigned int current_time = 0, previous_size = warehouseExpress.size();
+    double completion_time = 0.0;
 //    int i = 0;
     std::sort(warehouseExpress.begin(), warehouseExpress.end(),[](const Delivery* lhs, const Delivery* rhs){
         return lhs->get_duration() < rhs->get_duration();
@@ -84,7 +85,8 @@ void Company::deliveriesExpress(){
 //        std::cout << current_time << " " << warehouse_dup[0]->get_duration() << " " << test[i]->get_duration() << std::endl;
 //        i++;
         current_time += warehouseExpress[0]->get_duration();
-        completion_time = (warehouseExpress[0]->get_duration() + completion_time);
+        completion_time += (double) current_time;
+        delete warehouseExpress.at(0);
         warehouseExpress.erase(warehouseExpress.begin());
     }
     std::cout << "Delivery time: " << current_time << '\n';
