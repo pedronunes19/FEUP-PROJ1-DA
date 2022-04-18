@@ -81,7 +81,47 @@ void Company::deliveriesMinTrucks(){
 }
 
 void Company::deliveriesMaxProfit(){
-    std::cout << "Not Implemented" << std::endl;
+    unsigned int currentVolume = 0, currentWeight = 0, previous_size = warehouse.size();
+    int dailyProfit = 0;
+    if (!previous_size){
+        std::cout << "\tEverything has been delivered!" << std::endl;
+        return;
+    }
+    std::sort(warehouse.begin(), warehouse.end(),[](const Delivery* lhs, const Delivery* rhs) {
+        if (lhs->get_profit() == rhs->get_profit()){
+            if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() < rhs->get_volume();
+            return lhs->get_weight() + lhs->get_volume() < rhs->get_weight() + rhs->get_volume();
+        }
+        return lhs->get_profit() > rhs->get_profit();
+    });
+    std::sort(availableTrucks.begin(), availableTrucks.end(),[](const Truck* lhs, const Truck* rhs) {
+        if (lhs->get_cost() == rhs->get_cost()) return (lhs->get_volume() + lhs->get_weight()) < (rhs->get_volume() + rhs->get_weight());
+        return lhs->get_cost() < rhs->get_cost();
+    });
+    while (!warehouse.empty() && !availableTrucks.empty()){
+        if ((currentVolume + warehouse.at(0)->get_volume() <= availableTrucks.at(0)->get_volume()) &&
+        (currentWeight + warehouse.at(0)->get_weight() <= availableTrucks.at(0)->get_weight())) {
+            currentVolume += warehouse.at(0)->get_volume(), currentWeight += warehouse.at(0)->get_weight();
+            dailyProfit += warehouse.at(0)->get_profit();
+            delete warehouse.at(0);
+            warehouse.erase(warehouse.begin());
+            std::cout << currentVolume << " " << currentWeight << std::endl;
+        }
+        else {
+            dailyProfit -= availableTrucks.at(0)->get_cost();
+            unavailableTrucks.push_back(availableTrucks[0]);
+            availableTrucks.erase(availableTrucks.begin());
+            currentWeight = 0;
+            currentVolume = 0;
+        }
+    }
+    std::cout << unavailableTrucks.size() << " " << warehouse.size() << ' ' << dailyProfit << std::endl;
+
+    // trucks available for next day of deliveries
+    while (!unavailableTrucks.empty()){
+        availableTrucks.push_back(unavailableTrucks.at(unavailableTrucks.size()-1));
+        unavailableTrucks.pop_back();
+    }
 }
 
 void Company::deliveriesExpress(){
