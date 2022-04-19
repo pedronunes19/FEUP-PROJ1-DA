@@ -50,8 +50,8 @@ void Company::deliveriesMinTrucks(){
         return;
     }
     std::sort(warehouse.begin(), warehouse.end(),[](const Delivery* lhs, const Delivery* rhs) {
-        if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() < rhs->get_volume();
-        return lhs->get_weight() + lhs->get_volume() < rhs->get_weight() + rhs->get_volume();
+        if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() > rhs->get_volume();
+        return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
     });
     std::sort(availableTrucks.begin(), availableTrucks.end(),[](const Truck* lhs, const Truck* rhs) {
         return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
@@ -70,6 +70,10 @@ void Company::deliveriesMinTrucks(){
             currentWeight = 0;
             currentVolume = 0;
         }
+    }
+    if (!availableTrucks.empty()) {
+        unavailableTrucks.push_back(availableTrucks[0]);
+        availableTrucks.erase(availableTrucks.begin());
     }
     std::cout << unavailableTrucks.size() << " " << warehouse.size() << std::endl;
 
@@ -95,7 +99,7 @@ void Company::deliveriesMaxProfit(){
         return lhs->get_profit() > rhs->get_profit();
     });
     std::sort(availableTrucks.begin(), availableTrucks.end(),[](const Truck* lhs, const Truck* rhs) {
-        if (lhs->get_cost() == rhs->get_cost()) return (lhs->get_volume() + lhs->get_weight()) < (rhs->get_volume() + rhs->get_weight());
+        if (lhs->get_cost() == rhs->get_cost()) return (lhs->get_volume() + lhs->get_weight()) > (rhs->get_volume() + rhs->get_weight());
         return lhs->get_cost() < rhs->get_cost();
     });
     while (!warehouse.empty() && !availableTrucks.empty()){
@@ -115,6 +119,11 @@ void Company::deliveriesMaxProfit(){
             currentVolume = 0;
         }
     }
+    if (!availableTrucks.empty()) {
+        dailyProfit -= availableTrucks.at(0)->get_cost();
+        unavailableTrucks.push_back(availableTrucks[0]);
+        availableTrucks.erase(availableTrucks.begin());
+    }
     std::cout << unavailableTrucks.size() << " " << warehouse.size() << ' ' << dailyProfit << std::endl;
 
     // trucks available for next day of deliveries
@@ -132,15 +141,11 @@ void Company::deliveriesExpress(){
         std::cout << "\tEverything has been delivered!" << std::endl;
         return;
     }
-//    int i = 0;
     std::sort(warehouseExpress.begin(), warehouseExpress.end(),[](const Delivery* lhs, const Delivery* rhs){
         return lhs->get_duration() < rhs->get_duration();
     });
-//    std::vector<Delivery *> test = warehouse_dup;
     while (!warehouseExpress.empty()){
         if (current_time + warehouseExpress[0]->get_duration() > time_limit) break;
-//        std::cout << current_time << " " << warehouse_dup[0]->get_duration() << " " << test[i]->get_duration() << std::endl;
-//        i++;
         current_time += warehouseExpress[0]->get_duration();
         completion_time += (double) current_time;
         delete warehouseExpress.at(0);
