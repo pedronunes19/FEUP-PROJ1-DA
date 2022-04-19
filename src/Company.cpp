@@ -99,8 +99,8 @@ void Company::deliveriesMaxProfit(){
     }
     std::sort(warehouse.begin(), warehouse.end(),[](const Delivery* lhs, const Delivery* rhs) {
         if (lhs->get_profit() == rhs->get_profit()){
-            if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() < rhs->get_volume();
-            return lhs->get_weight() + lhs->get_volume() < rhs->get_weight() + rhs->get_volume();
+            if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() > rhs->get_volume();
+            return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
         }
         return lhs->get_profit() > rhs->get_profit();
     });
