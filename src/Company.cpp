@@ -55,6 +55,7 @@ void Company::deliveriesMinTrucks(){
         return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
     });
     std::sort(availableTrucks.begin(), availableTrucks.end(),[](const Truck* lhs, const Truck* rhs) {
+        if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() > rhs->get_volume();
         return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
     });
     while (!warehouse.empty() && !availableTrucks.empty()){
@@ -105,7 +106,10 @@ void Company::deliveriesMaxProfit(){
         return lhs->get_profit() > rhs->get_profit();
     });
     std::sort(availableTrucks.begin(), availableTrucks.end(),[](const Truck* lhs, const Truck* rhs) {
-        if (lhs->get_cost() == rhs->get_cost()) return (lhs->get_volume() + lhs->get_weight()) > (rhs->get_volume() + rhs->get_weight());
+        if (lhs->get_cost() == rhs->get_cost()){
+            if ((lhs->get_weight() + lhs->get_volume()) == (rhs->get_weight() + rhs->get_volume())) return lhs->get_volume() > rhs->get_volume();
+            return lhs->get_weight() + lhs->get_volume() > rhs->get_weight() + rhs->get_volume();
+        }
         return lhs->get_cost() < rhs->get_cost();
     });
     while (!warehouse.empty() && !availableTrucks.empty()){
