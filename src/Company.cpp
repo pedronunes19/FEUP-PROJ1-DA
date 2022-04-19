@@ -44,6 +44,7 @@ void Company::storeDeliveries(std::vector<std::string> deliveries){
 }
 
 void Company::deliveriesMinTrucks(){
+    auto startTime = std::chrono::high_resolution_clock::now();
     unsigned int currentVolume = 0, currentWeight = 0, previous_size = warehouse.size();
     if (!previous_size){
         std::cout << "\tEverything has been delivered!" << std::endl;
@@ -75,7 +76,11 @@ void Company::deliveriesMinTrucks(){
         unavailableTrucks.push_back(availableTrucks[0]);
         availableTrucks.erase(availableTrucks.begin());
     }
+    auto stopTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
+
     std::cout << unavailableTrucks.size() << " " << warehouse.size() << std::endl;
+    std::cout << "\tDuration: "<< duration.count() << " ms" << std::endl;
 
     // trucks available for next day of deliveries
     while (!unavailableTrucks.empty()){
@@ -85,6 +90,7 @@ void Company::deliveriesMinTrucks(){
 }
 
 void Company::deliveriesMaxProfit(){
+    auto startTime = std::chrono::high_resolution_clock::now();
     unsigned int currentVolume = 0, currentWeight = 0, previous_size = warehouse.size();
     int dailyProfit = 0;
     if (!previous_size){
@@ -119,12 +125,19 @@ void Company::deliveriesMaxProfit(){
             currentVolume = 0;
         }
     }
+
     if (!availableTrucks.empty()) {
         dailyProfit -= availableTrucks.at(0)->get_cost();
         unavailableTrucks.push_back(availableTrucks[0]);
         availableTrucks.erase(availableTrucks.begin());
     }
+
+    auto stopTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
+
+
     std::cout << unavailableTrucks.size() << " " << warehouse.size() << ' ' << dailyProfit << std::endl;
+    std::cout << "\tDuration: "<< duration.count() << " ms" << std::endl;
 
     // trucks available for next day of deliveries
     while (!unavailableTrucks.empty()){
@@ -134,6 +147,7 @@ void Company::deliveriesMaxProfit(){
 }
 
 void Company::deliveriesExpress(){
+    auto startTime = std::chrono::high_resolution_clock::now();
     const unsigned int time_limit = 28800; // 8 horas em segundos, das 9 às 5
     unsigned int current_time = 0, previous_size = warehouseExpress.size();
     double completion_time = 0.0;
@@ -151,10 +165,15 @@ void Company::deliveriesExpress(){
         delete warehouseExpress.at(0);
         warehouseExpress.erase(warehouseExpress.begin());
     }
+
+    auto stopTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
+
     std::cout << "\tDelivery time: " << current_time << '\n';
     std::cout << "\tPackages delivered: " << previous_size - warehouseExpress.size() << " out of " << previous_size << '\n';
     std::cout << "\tAverage delivery duration: " << current_time / (previous_size - warehouseExpress.size()) << '\n';
     std::cout << "\tAverage completion time: " << completion_time / (previous_size - warehouseExpress.size()) << std::endl;
+    std::cout << "\tDuration: "<< duration.count() << " ms" << std::endl;
 };
 
 void Company::restoreWarehouse(){
