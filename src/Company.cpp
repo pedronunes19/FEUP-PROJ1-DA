@@ -78,11 +78,11 @@ void Company::deliveriesMinTrucks(){
         availableTrucks.erase(availableTrucks.begin());
     }
     auto stopTime = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stopTime - startTime);
 
     std::cout << "\tTrucks used: " << unavailableTrucks.size() << '\n';
     std::cout << "\tPackages delivered: " << previous_size - warehouse.size() << " out of " << previous_size << '\n';
-    std::cout << "\tAlgorithm Duration: "<< duration.count() << " ms" << std::endl;
+    std::cout << "\tAlgorithm Duration: "<< duration.count() << " microseconds" << std::endl;
 
     // trucks available for next day of deliveries
     while (!unavailableTrucks.empty()){
@@ -139,12 +139,12 @@ void Company::deliveriesMaxProfit(){
     }
 
     auto stopTime = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stopTime - startTime);
 
     std::cout << "\tTrucks used: " << unavailableTrucks.size() << '\n';
     std::cout << "\tProfit: " << dailyProfit << '\n';
     std::cout << "\tPackages delivered: " << previous_size - warehouse.size() << " out of " << previous_size << '\n';
-    std::cout << "\tAlgorithm Duration: "<< duration.count() << " ms" << std::endl;
+    std::cout << "\tAlgorithm Duration: "<< duration.count() << " microseconds" << std::endl;
 
     // trucks available for next day of deliveries
     while (!unavailableTrucks.empty()){
@@ -174,13 +174,13 @@ void Company::deliveriesExpress(){
     }
 
     auto stopTime = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stopTime - startTime);
 
     std::cout << "\tDelivery time: " << current_time << '\n';
     std::cout << "\tPackages delivered: " << previous_size - warehouseExpress.size() << " out of " << previous_size << '\n';
     std::cout << "\tAverage delivery duration: " << current_time / (previous_size - warehouseExpress.size()) << '\n';
     std::cout << "\tAverage completion time: " << completion_time / (previous_size - warehouseExpress.size()) << std::endl;
-    std::cout << "\tAlgoritm Duration: "<< duration.count() << " ms" << std::endl;
+    std::cout << "\tAlgoritm Duration: "<< duration.count() << " microseconds" << std::endl;
 };
 
 void Company::restoreWarehouse(){
