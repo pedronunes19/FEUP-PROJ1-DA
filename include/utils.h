@@ -7,7 +7,7 @@
 namespace utils::file {
 
     /**
-     * Reads a file at the specified path and returns its content as a collection of its lines.
+     * @brief Reads a file at the specified path and returns its content as a collection of its lines.
      * In the context of this project, and the dataset given (text files), the first line of each file.
      *
      * @param filePath the path of the file to read

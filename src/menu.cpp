@@ -4,7 +4,7 @@ bool Menu::exitApplication = false;
 
 void Menu::init() {
 
-    Company deliveryCompany{"DA"}; 
+    Company deliveryCompany{"GDC (Generic Delivery Company)"};
 
     atexit(Menu::endProgram);
 
