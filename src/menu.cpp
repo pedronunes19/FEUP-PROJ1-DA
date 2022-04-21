@@ -1,6 +1,5 @@
 #include "../include/menu.h"
 
-std::string Menu::ADMIN_PASSWORD = "admin";
 bool Menu::exitApplication = false;
 
 void Menu::init() {
@@ -67,20 +66,6 @@ void Menu::init() {
 }
 
 int Menu::showAdminMenu() {
-
-    std::string password;
-    std::cout << "\tEnter your password please: ";
-    std::cin >> password;
-
-    if (!std::cin)
-        exit(0);
-
-    if (password != Menu::ADMIN_PASSWORD) {
-        std::cout << "\tInvalid password, going back to main menu\n\n";
-        return ADMIN_BACK;
-    }
-
-    std::cout << std::string(100, '\n');
 
     int option;
 

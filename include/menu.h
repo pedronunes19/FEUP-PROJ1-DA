@@ -6,8 +6,6 @@
 
 class Menu {
 
-    static std::string ADMIN_PASSWORD;
-
     static bool exitApplication;
 
     enum MainMenuOption {
