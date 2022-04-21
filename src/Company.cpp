@@ -64,7 +64,7 @@ void Company::deliveriesMinTrucks(){
             currentVolume += warehouse.at(0)->get_volume(), currentWeight += warehouse.at(0)->get_weight();
             delete warehouse.at(0);
             warehouse.erase(warehouse.begin());
-            std::cout << currentVolume << " " << currentWeight << std::endl;
+            // std::cout << currentVolume << " " << currentWeight << std::endl;
         }
         else {
             unavailableTrucks.push_back(availableTrucks[0]);
@@ -80,8 +80,9 @@ void Company::deliveriesMinTrucks(){
     auto stopTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
 
-    std::cout << unavailableTrucks.size() << " " << warehouse.size() << std::endl;
-    std::cout << "\tDuration: "<< duration.count() << " ms" << std::endl;
+    std::cout << "\tTrucks used: " << unavailableTrucks.size() << '\n';
+    std::cout << "\tPackages delivered: " << previous_size - warehouse.size() << " out of " << previous_size << '\n';
+    std::cout << "\tAlgorithm Duration: "<< duration.count() << " ms" << std::endl;
 
     // trucks available for next day of deliveries
     while (!unavailableTrucks.empty()){
@@ -112,6 +113,7 @@ void Company::deliveriesMaxProfit(){
         }
         return lhs->get_cost() < rhs->get_cost();
     });
+    
     while (!warehouse.empty() && !availableTrucks.empty()){
         if ((currentVolume + warehouse.at(0)->get_volume() <= availableTrucks.at(0)->get_volume()) &&
         (currentWeight + warehouse.at(0)->get_weight() <= availableTrucks.at(0)->get_weight())) {
@@ -119,7 +121,7 @@ void Company::deliveriesMaxProfit(){
             dailyProfit += warehouse.at(0)->get_profit();
             delete warehouse.at(0);
             warehouse.erase(warehouse.begin());
-            std::cout << currentVolume << " " << currentWeight << std::endl;
+            // std::cout << currentVolume << " " << currentWeight << std::endl;
         }
         else {
             dailyProfit -= availableTrucks.at(0)->get_cost();
@@ -139,9 +141,10 @@ void Company::deliveriesMaxProfit(){
     auto stopTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stopTime - startTime);
 
-
-    std::cout << unavailableTrucks.size() << " " << warehouse.size() << ' ' << dailyProfit << std::endl;
-    std::cout << "\tDuration: "<< duration.count() << " ms" << std::endl;
+    std::cout << "\tTrucks used: " << unavailableTrucks.size() << '\n';
+    std::cout << "\tProfit: " << dailyProfit << '\n';
+    std::cout << "\tPackages delivered: " << previous_size - warehouse.size() << " out of " << previous_size << '\n';
+    std::cout << "\tAlgorithm Duration: "<< duration.count() << " ms" << std::endl;
 
     // trucks available for next day of deliveries
     while (!unavailableTrucks.empty()){
@@ -177,7 +180,7 @@ void Company::deliveriesExpress(){
     std::cout << "\tPackages delivered: " << previous_size - warehouseExpress.size() << " out of " << previous_size << '\n';
     std::cout << "\tAverage delivery duration: " << current_time / (previous_size - warehouseExpress.size()) << '\n';
     std::cout << "\tAverage completion time: " << completion_time / (previous_size - warehouseExpress.size()) << std::endl;
-    std::cout << "\tDuration: "<< duration.count() << " ms" << std::endl;
+    std::cout << "\tAlgoritm Duration: "<< duration.count() << " ms" << std::endl;
 };
 
 void Company::restoreWarehouse(){
