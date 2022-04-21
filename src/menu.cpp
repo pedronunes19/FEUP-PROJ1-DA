@@ -69,7 +69,7 @@ int Menu::showAdminMenu() {
 
     int option;
 
-    std::cout << "\tHello administrator, what would you like to do?\n\n";
+    std::cout << "\tHello, what would you like to do?\n\n";
     std::cout << "\t[1] Restore Warehouse\n\t[2] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
@@ -86,7 +86,7 @@ int Menu::showClientMenu() {
 
     int option;
 
-    std::cout << "\tHello client, what would you like to do?\n\n";
+    std::cout << "\tHello, what would you like to do?\n\n";
     std::cout << "\t[1] Deliveries (min trucks)\n\t[2] Deliveries (max profit)\n\t[3] Express Deliveries\n\t[4] Back\n\n";
     std::cout << "\t> ";
     std::cin >> option;
@@ -104,7 +104,7 @@ int Menu::showInitialMenu(const std::string& busCompany) {
     int option;
 
     std::cout << "\t\tWelcome to " << busCompany << "\n\n";
-    std::cout << "\t[1] Client\n\t[2] Admin\n\t[3] Exit\n\n";
+    std::cout << "\t[1] Deliveries\n\t[2] Admin\n\t[3] Exit\n\n";
     std::cout << "\t> ";
     std::cin >> option;
 
