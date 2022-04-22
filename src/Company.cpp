@@ -82,6 +82,7 @@ void Company::deliveriesMinTrucks(){
 
     std::cout << "\tTrucks used: " << unavailableTrucks.size() << '\n';
     std::cout << "\tPackages delivered: " << previous_size - warehouse.size() << " out of " << previous_size << '\n';
+    std::cout << "\tPackages per truck (average): " << (double) (previous_size - warehouse.size())/unavailableTrucks.size() << '\n';
     std::cout << "\tAlgorithm Duration: "<< duration.count() << " microseconds" << std::endl;
 
     // trucks available for next day of deliveries
