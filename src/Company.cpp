@@ -64,7 +64,8 @@ void Company::deliveriesMinTrucks(){
             currentVolume += warehouse.at(0)->get_volume(), currentWeight += warehouse.at(0)->get_weight();
             delete warehouse.at(0);
             warehouse.erase(warehouse.begin());
-            // std::cout << currentVolume << " " << currentWeight << std::endl;
+            // std::cout << currentVolume << " " << currentWeight << '\n';
+            std::cout << '\n';
         }
         else {
             unavailableTrucks.push_back(availableTrucks[0]);
@@ -122,7 +123,8 @@ void Company::deliveriesMaxProfit(){
             dailyProfit += warehouse.at(0)->get_profit();
             delete warehouse.at(0);
             warehouse.erase(warehouse.begin());
-            // std::cout << currentVolume << " " << currentWeight << std::endl;
+            // std::cout << currentVolume << " " << currentWeight << '\n';
+            std::cout << '\n';
         }
         else {
             dailyProfit -= availableTrucks.at(0)->get_cost();
@@ -172,6 +174,7 @@ void Company::deliveriesExpress(){
         completion_time += (double) current_time;
         delete warehouseExpress.at(0);
         warehouseExpress.erase(warehouseExpress.begin());
+        std::cout << '\n';
     }
 
     auto stopTime = std::chrono::high_resolution_clock::now();
